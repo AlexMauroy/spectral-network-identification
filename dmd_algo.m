@@ -46,10 +46,6 @@ end
 if method == 1
     % standard DMD algorithm
     [Uc,Sc,Vc] = svd(X,'econ');
-%     r=12;
-%     Uc=Uc(:,1:r);
-%     Sc=Sc(1:r,1:r);
-%     Vc=Vc(:,1:r);
     A_tilde = Uc'*Y*Vc/Sc;
     [w,eig_lambda] = eig(A_tilde);
     V = Uc*w;
@@ -63,12 +59,10 @@ elseif method == 3
     % algorithm 3 in Tu et al., 2013 (exact DMD)
     [Uc,Sc,Vc] = svd(X,'econ');
     [Q,R] = qr([X Y]);
-    A = Y*Vc*inv(Sc)*Uc';
+    A = Y*Vc/Sc*Uc';
     A_tildeQ = Q'*A*Q;
     [w,eig_lambda]=eig(A_tildeQ);
     V = Q*w;
-    % % other way of computing the DMD/Koopman modes (algo 2 in Tu et al., 2013); corresponds to exact modes
-    % V = Y*Vc*inv(Sc)*w*inv(eig_lambda);
 
 elseif method == 4
     % algorithm 4 in Tu et al., 2013
@@ -77,14 +71,13 @@ elseif method == 4
     q = p/norm(p);
     A_tilde = Uc'*Y*Vc/Sc;
     [w,eig_lambda] = eig(A_tilde);
-    B = Y*Vc*inv(Sc);
+    B = Y*Vc/Sc;
     V = Uc*w+q*q'*B*w*eig_lambda;
 
 end
 
 % ordering
 scaling = inv(eig_lambda)/V*X(:,2);
-%scaling = pinv(V)*X(:,1);
 [Y,I] = sort(abs(scaling),'descend');
 V = V*diag(scaling);
 modes = V(:,I);
