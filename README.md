@@ -10,4 +10,5 @@ Matlab functions:
 - dmd_algo.m : Dynamic Mode Decomposition (DMD) algorithm (exctrats the Koopman spectrum from data)
 - nonlinear_network_model : nonlinear dynamics used with nonlinear_network_ident.m
 
-Reference: A. Mauroy and J. Hendrickx, Spectral identification of networks using sparse measurements, SIAM Journal on Applied Dynamical Systems, vol. 16, no. 1, pp. 479-513, 2017
+Reference: 
+A. Mauroy and J. Hendrickx, Spectral identification of networks using sparse measurements, SIAM Journal on Applied Dynamical Systems, vol. 16, no. 1, pp. 479-513, 2017
