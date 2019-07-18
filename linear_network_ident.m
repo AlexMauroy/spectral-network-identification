@@ -16,7 +16,7 @@ Ad_unweight = ones(n,n);
 Ad_unweight(zero_el) = 0;
 L_unweight = Ad_unweight-diag(sum(Ad_unweight'));
 
-% Laplacian eigenvalues (what we try to recover from data)
+% Laplacian eigenvalues
 lambda_L = eig(L);
 
 % local linear dynamics (attached to each node); x_dot = A x + B u ; y = C x
